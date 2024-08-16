@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ANTLRGenerationPreferences">
+    <option name="perGrammarGenerationSettings">
+      <list>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/MyLanguageParser.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\ASUS\Desktop\Compiler\MyNewLanguage" />
+          <option name="libDir" value="C:\Users\ASUS\Desktop\Compiler\MyNewLanguage" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="gen" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/MyLanguageLexer.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\ASUS\IdeaProjects\MyNewLanguage" />
+          <option name="libDir" value="C:\Users\ASUS\IdeaProjects\MyNewLanguage" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="gen" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/CLASSES/src/JsGrammer/MyLanguageParser.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\ASUS\Desktop\MyNewLanguage" />
+          <option name="libDir" value="C:\Users\ASUS\Desktop\MyNewLanguage" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="gen" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/CLASSES/src/JsGrammer/MyLanguageLexer.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\ASUS\Desktop\MyNewLanguage" />
+          <option name="libDir" value="C:\Users\ASUS\Desktop\MyNewLanguage" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="gen" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,36 @@
+import React from 'react'
+import './views/index.html'
+
+const HomePage=()=>{
+
+const [salary,SetSalary]=useState();
+const [age,SetAge]=useState();
+let name = 0
+var name = "ahmad"
+console.log("sum is" + sum);
+let sum = false
+
+const UseRef = use Ref (test);
+    useEffect(()=>{
+            setName(name);
+        setImg(img1);
+    },[]);
+
+        useEffect(()=>{
+            setName(name);
+            setImg(img1);
+        },[]);
+
+function test(){
+console.log(h);
+return(<div></div>)}
+
+return(
+<div><h1>name</h1>
+<div><img src={image} /></div>
+<p>this is paragraph</p>
+<img src={image} />
+<div>discreption</div></div>); }export default HomePage
+
+
+
