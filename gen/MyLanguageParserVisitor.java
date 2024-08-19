@@ -41,6 +41,12 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLink(MyLanguageParser.LinkContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#assign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign(MyLanguageParser.AssignContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#decl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -148,6 +154,18 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImg(MyLanguageParser.ImgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#button}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitButton(MyLanguageParser.ButtonContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(MyLanguageParser.VariableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#props}.
 	 * @param ctx the parse tree

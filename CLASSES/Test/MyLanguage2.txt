@@ -6,9 +6,12 @@ const HomePage=()=>{
 const [salary,SetSalary]=useState();
 const [age,SetAge]=useState();
 let name = 0
-var name = "ahmad"
-console.log("sum is" + sum);
+var sum = "ahmad"
 let sum = false
+a = 5 + 3 + x + y + "ziad" + 1
+b = 3 / 0
+
+console.log("sum is" + sum);
 
 const UseRef = use Ref (test);
     useEffect(()=>{
@@ -30,7 +33,7 @@ return(
 <div><img src={image} /></div>
 <p>this is paragraph</p>
 <img src={image} />
-<div>discreption</div></div>); }export default HomePage
+<div>description</div></div>); }export default HomePage
 
 
 

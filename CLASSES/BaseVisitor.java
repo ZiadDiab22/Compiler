@@ -2,10 +2,20 @@ package CLASSES;
 import gen.MyLanguageParser;
 import gen.MyLanguageParserBaseVisitor;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseVisitor extends MyLanguageParserBaseVisitor {
 
     SymbolTable symbolTable = new SymbolTable();
     SemanticErrors E = new SemanticErrors();
+    StringBuilder str = new StringBuilder();
+    List<String> functions = new ArrayList<>();
+    List<List> assignments = new ArrayList<>();
+    List<String> vars = new ArrayList<>();
+
 
     @Override
     public new_component visitNew_component(MyLanguageParser.New_componentContext ctx) {
@@ -22,9 +32,11 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
    if (ctx.arrow_function()!=null){
        NC.setArrow_function(visitArrow_function(ctx.arrow_function()));
        row.setValue(ctx.arrow_function().ARRAY_STRING_VALUES().getText());
+       NC.GenerateHtml(str,ctx.arrow_function().ARRAY_STRING_VALUES().getText());
    } else {
        NC.setFunction(visitFunction(ctx.function()));
        row.setValue(ctx.function().ARRAY_STRING_VALUES().getText());
+       NC.GenerateHtml(str,ctx.arrow_function().ARRAY_STRING_VALUES().getText());
    }
         symbolTable.getRows().add(row);
 
@@ -40,7 +52,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         if(ctx.useEffect(i)!=null){
             NC.getUseEffect().add(visitUseEffect(ctx.useEffect(i)));
             }}
-
+        str.append("\n<script>\n");
     for (int i=0;i<ctx.component().size();i++){
         if(ctx.component(i)!=null){
             NC.getComponents().add(visitComponent(ctx.component(i)));
@@ -51,21 +63,38 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             NC.getDecls().add(visitDecl(ctx.decl(i)));
         }}
 
+        for (int i=0;i<ctx.assign().size();i++){
+            if(ctx.assign(i)!=null){
+                NC.getAssigns().add(visitAssign(ctx.assign(i)));
+            }}
+
     for (int i=0;i<ctx.log().size();i++){
             if(ctx.log(i)!=null){
                 NC.getLogs().add(visitLog(ctx.log(i)));
             }}
+        str.append("\n</script>\n");
 
     if(ctx.export()!=null)
         NC.setExport(visitExport(ctx.export()));
 
-    this.E.check(this.symbolTable);
+    NC.setReturnHtml(visitReturn_html((ctx.return_html())));
+
+        str.append("\n</body>\n</html>\n");
+
+        this.E.check(this.symbolTable,this.functions,this.assignments);
     if (this.E.errors.size()>0){
         this.symbolTable.print();
         this.E.print();
     } else  {
         System.out.println("All is OK");
         this.symbolTable.print();}
+    try (FileWriter file = new FileWriter("GenerateHtml.txt")) {
+        file.write(str.toString());
+        //System.out.println("success");
+    } catch(IOException e){
+        System.out.println("an error occured");
+        }
+        this.vars = E.addVars(this.symbolTable);
         return NC;
     }
 
@@ -73,14 +102,21 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public function visitFunction(MyLanguageParser.FunctionContext ctx) {
         function f = new function();
         f.setName(ctx.ARRAY_STRING_VALUES().getText());
+       // f.GenerateHtml(str,ctx.ARRAY_STRING_VALUES().getText());
+        this.functions.add(ctx.ARRAY_STRING_VALUES().getText());
+        this.functions.add(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getLine()));
+        this.functions.add(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getCharPositionInLine() + 1));
+
         return f;
     }
 
     @Override
     public log visitLog(MyLanguageParser.LogContext ctx) {
         log l = new log();
+        str.append("console.log(");
         for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
             if(ctx.ARRAY_STRING_VALUES(i)!=null){
+                str.append(ctx.ARRAY_STRING_VALUES(i).getText());
                 l.logs.add(ctx.ARRAY_STRING_VALUES(i).getText());
                 Row row = new Row();
                 row.setType("print");
@@ -88,6 +124,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
                 row.setLine(Integer.toString(ctx.Console().getSymbol().getLine()));
                 symbolTable.getRows().add(row);
             }}
+        str.append(");\n");
         return l;
     }
 
@@ -95,14 +132,17 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public arrow_function visitArrow_function(MyLanguageParser.Arrow_functionContext ctx) {
         arrow_function f = new arrow_function();
         f.setName(ctx.ARRAY_STRING_VALUES().getText());
+       // f.GenerateHtml(str,ctx.ARRAY_STRING_VALUES().getText());
+        this.functions.add(ctx.ARRAY_STRING_VALUES().getText());
+        this.functions.add(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getLine()));
+        this.functions.add(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getCharPositionInLine() + 1));
         return f;
     }
-
-
 
     @Override
     public imp visitImp(MyLanguageParser.ImpContext ctx) {
         imp i = new imp();
+        i.GenerateHtml(str);
         if(ctx.ARRAY_STRING_VALUES()!=null)
             i.setName(ctx.ARRAY_STRING_VALUES().getText());
         else i.setName("All file");
@@ -182,10 +222,35 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         row.setValue("\t\t"+d.getVariable());
         row.setLine(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getLine()));
         symbolTable.getRows().add(row);
+        str.append(ctx.VarType().getText() + " " + ctx.ARRAY_STRING_VALUES().getText()+ " = " + ctx.value().getText()+"\n");
         return d;
     }
 
+    @Override
+    public assign visitAssign(MyLanguageParser.AssignContext ctx) {
+        assign a = new assign();
+        List<String> as = new ArrayList<>();
+        for (int i=0 ; i< ctx.children.size();i++){
+            if (i!=1)
+            as.add(ctx.children.get(i).getText());
+        }
+        List<Integer> l = new ArrayList<>();
+        l.add(ctx.Equal().getSymbol().getLine());
+        this.assignments.add(as);
+        this.assignments.add(l);
+        return a;
+    }
 
+    @Override
+    public value visitValue(MyLanguageParser.ValueContext ctx) {
+            value v = new value();
+            if(ctx.One_Qoute_Term()!=null) v.setName(ctx.One_Qoute_Term().getText());
+            if(ctx.Tow_Qoute_Term()!=null) v.setName(ctx.Tow_Qoute_Term().getText());
+            if(ctx.Text()!=null) v.setName(ctx.Text().getText());
+            if(ctx.Bool()!=null) v.setName(ctx.Bool().getText());
+
+        return v;
+        }
 
     @Override
     public Var visitVar(MyLanguageParser.VarContext ctx) {
@@ -223,9 +288,11 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         if (ctx.arrow_function()!=null){
             c.setArrow_function(visitArrow_function(ctx.arrow_function()));
             row.setValue(ctx.arrow_function().ARRAY_STRING_VALUES().getText());
+            str.append("const "+ctx.arrow_function().getText()+"=()=>{\n");
         } else {
             c.setFunction(visitFunction(ctx.function()));
             row.setValue(ctx.function().ARRAY_STRING_VALUES().getText());
+            str.append(ctx.function().getText()+"\n");
         }
         for (int i=0;i<ctx.log().size();i++){
             if(ctx.log(i)!=null){
@@ -239,11 +306,10 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 
         symbolTable.getRows().add(row);
         c.setReturnHtml(visitReturn_html((ctx.return_html())));
+        str.append("\n}\n");
 
     return c;
     }
-
-
 
     @Override
     public return_html visitReturn_html(MyLanguageParser.Return_htmlContext ctx) {
@@ -256,6 +322,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public html_tag visitHtml_tag(MyLanguageParser.Html_tagContext ctx) {
         html_tag h = new html_tag();
+        str.append("<div>");
 //        Row row = new Row();
 //        row.setType("html tag");
 //        row.setValue("div");
@@ -264,6 +331,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         if (ctx.tag().children != null)
             h.setTag(visitTag(ctx.tag()));
         else h.setName("div");
+        str.append("</div>");
         return h;
       }
 
@@ -292,6 +360,10 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public div visitDiv(MyLanguageParser.DivContext ctx) {
         div d = new div();
+        str.append("<div>");
+        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
+            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
+        }
         d.setName("div");
         if (ctx.tag()!=null){
             d.setTag(visitTag(ctx.tag()));
@@ -300,12 +372,17 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //        row.setType("html tagggg");
 //        row.setValue("div");
 //        symbolTable.getRows().add(row);
-        return d;
+            str.append("</div>\n");
+            return d;
     }
 
     @Override
     public h1 visitH1(MyLanguageParser.H1Context ctx) {
         h1 h = new h1();
+        str.append("<h1>");
+        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
+            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
+        }
         h.setName("h1");
         if (ctx.tag()!=null){
             h.setTag(visitTag(ctx.tag()));
@@ -314,6 +391,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //        row.setType("html tag");
 //        row.setValue("h1");
 //        symbolTable.getRows().add(row);
+        str.append("</h1>");
         return h;
     }
 
@@ -321,6 +399,10 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public p visitP(MyLanguageParser.PContext ctx) {
         p pp = new p();
         pp.setName("p");
+        str.append("<p>");
+        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
+            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
+        }
         if (ctx.tag()!=null){
             pp.setTag(visitTag(ctx.tag()));
         }
@@ -328,6 +410,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //        row.setType("html tag");
 //        row.setValue("p");
 //        symbolTable.getRows().add(row);
+        str.append("</p>\n");
         return pp;
     }
 
@@ -335,10 +418,20 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public img visitImg(MyLanguageParser.ImgContext ctx) {
         img i = new img();
         i.setName(ctx.Img().getText());
+        str.append("\n<img src={");
+        visitSrc(ctx.src());
+        str.append("}/>\n");
 //        Row row = new Row();
 //        row.setType("html tag");
 //        row.setValue("img");
 //        symbolTable.getRows().add(row);
         return i;
+    }
+
+    @Override
+    public src visitSrc(MyLanguageParser.SrcContext ctx) {
+        src s = new src();
+        str.append(ctx.ARRAY_STRING_VALUES().getText());
+        return s;
     }
 }

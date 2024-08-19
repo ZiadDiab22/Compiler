@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+<script>
+function test(){
+console.log(h);
+<div></div>
+}
+let name = 0
+var sum = "ahmad"
+let sum = false
+console.log(sum);
+
+</script>
+<div><div>
+<img src={image}/>
+</div>
+<div> description</div>
+<p> this is paragraph</p>
+<h1> name</h1>
+<img src={image}/>
+</div>
+</body>
+</html>

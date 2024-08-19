@@ -15,4 +15,9 @@ public class arrow_function {
         public String toString() {
             return  name;
         }
+
+    public StringBuilder GenerateHtml(StringBuilder str,String name){
+        str.append("const "+name+"=()=>{\n");
+        return str;
+    }
 }

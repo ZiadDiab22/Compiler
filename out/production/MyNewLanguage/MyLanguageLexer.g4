@@ -20,6 +20,7 @@ Div : 'div' ;
 H1 : 'h1' ;
 Img : 'img' ;
 P : 'p';
+Button : 'button';
 
 Width: ' '* 'width';
 Height : ' '* 'height';
@@ -28,10 +29,11 @@ Rate : '%';
 Src: ' '* 'src';
 OnClick :  ( 'onClick' | 'onclick' );
 
+Minus : '-';
 SEIMIE_QO : ';';
 Space : ' ' ;
 Equal : '=' ;
-DIGITS : '0' .. '9' ;
+//DIGITS : '0' .. '9' ;
 Esc : '\\' ;
 Slash:'/';
 Colon : ':' ;
@@ -57,13 +59,13 @@ Underscore : '_' ;
 Pipe : '|' ;
 COMMA: ',';
 Dot : '.' ;
+Math : Plus | Star | Slash | Minus;
 
 Path : Quote Dot? (Slash ARRAY_STRING_VALUES)+ (Dot ARRAY_STRING_VALUES)? Quote;
 
 One_Qoute_Term : '\''Space*(LETTER|ARRAY_STRING_VALUES) Space*'\'';
 Tow_Qoute_Term : DQuote Space* (ARRAY_STRING_VALUES Space)* Space* DQuote;
 Text : DQuote Space* (ARRAY_STRING_VALUES Space*)* Space* DQuote;
-
 
 DQuote : '"' ;
 

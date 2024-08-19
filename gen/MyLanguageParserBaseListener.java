@@ -77,6 +77,18 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssign(MyLanguageParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssign(MyLanguageParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDecl(MyLanguageParser.DeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -288,6 +300,30 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitImg(MyLanguageParser.ImgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterButton(MyLanguageParser.ButtonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitButton(MyLanguageParser.ButtonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable(MyLanguageParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable(MyLanguageParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

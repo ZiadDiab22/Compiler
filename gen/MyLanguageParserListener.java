@@ -58,6 +58,16 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 */
 	void exitLink(MyLanguageParser.LinkContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssign(MyLanguageParser.AssignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#assign}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssign(MyLanguageParser.AssignContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#decl}.
 	 * @param ctx the parse tree
 	 */
@@ -237,6 +247,26 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitImg(MyLanguageParser.ImgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#button}.
+	 * @param ctx the parse tree
+	 */
+	void enterButton(MyLanguageParser.ButtonContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#button}.
+	 * @param ctx the parse tree
+	 */
+	void exitButton(MyLanguageParser.ButtonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable(MyLanguageParser.VariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable(MyLanguageParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#props}.
 	 * @param ctx the parse tree

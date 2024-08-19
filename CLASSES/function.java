@@ -15,5 +15,10 @@ public class function {
     public String toString() {
         return  name;
     }
+
+//    public StringBuilder GenerateHtml(StringBuilder str,String name){
+//        str.append("  "+name+"(){\n");
+//        return str;
+//    }
 }
 

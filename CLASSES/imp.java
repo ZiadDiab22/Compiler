@@ -26,4 +26,9 @@ public class imp {
                 ", path = " + link +
                 "}\n";
     }
+
+    public StringBuilder GenerateHtml(StringBuilder str){
+        //str.append("yy");
+        return str;
+    }
 }
