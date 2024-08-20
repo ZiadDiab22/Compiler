@@ -1,6 +1,7 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class arrow_function {
+public class arrow_function extends Expression{
         String name;
 
         public String getName() {

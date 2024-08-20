@@ -1,8 +1,9 @@
 package CLASSES;
 import java.util.ArrayList;
 import java.util.List;
+import CLASSES.Expression;
 
-public class log {
+public class log extends Expression{
     List <String> logs = new ArrayList<>();
 
     public List<String> getLogs() {

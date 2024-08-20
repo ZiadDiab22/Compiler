@@ -1,82 +1,39 @@
-const HomePage=()=>{
+import React from 'react'
+import './views/index.html'
 
-  const [name,setName] = useState()
-  const [image,setImage] = useState( img1 );
-  const [descrip,setDescrip] = useState();
+const test=()=>{
 
-    const UseRef = use Ref (test);
+const [salary,SetSalary]=useState();
+const [age,SetAge]=useState();
+let name = 0
+var sum = "ahmad"
+let sum = false
+a = 5 + 3 + x + y + "ziad" + 1
+b = 3 / 0
 
-    function test(
-    {
-        return(
-            <div>
-                <div>
-                    <img src={image} />
-                    <p>{name}</p>
-                    <p>{descrip}</p>
-                </div>
-            </div>
-        )
-    }
+console.log("sum is" + sum);
 
-    return(
-    <div>
-        <div>
-          <div onClick={
-            setName(LEAO with limon);
-            setImage(img1);
-            setDescrip(cold and frish drink with limon)
-          }>
-            <img src={img1} />
-            <p>LEAO</p>
-        </div>
+const UseRef = use Ref (test);
+    useEffect(()=>{
+            setName(name);
+        setImg(img1);
+    },[]);
 
-        <div onClick={
-            setName(FANTA);
-            setImage(img2);
-            setDescrip(The best orange soft drink with unique experience and taste)
-          }>
-            <img src={img2} />
-            <p>FANTA</p>
-        </div>
+        useEffect(()=>{
+            setName(name);
+            setImg(img1);
+        },[]);
 
-        <div onClick={
-            setName(FANTA);
-            setImage(img3);
-            setDescrip(Fanta orange drink with new design);
-            setHidd()
-          }>
-            <img src={img3} />
-            <p>FANTA</p>
-        </div>
+function test(){
+console.log(h);
+return(<div></div>)}
 
-        <div onClick={
-            setName(OLEPOP with limon);
-            setImage(img4);
-            setDescrip(The best lemon flavored soft drink);
-          }>
-            <img src={img4} />
-            <p>OLEPOP</p>
-        </div>
+return(
+<div><h1>name</h1>
+<div><img src={image} /></div>
+<p>this is paragraph</p>
+<img src={image} />
+<div>description</div></div>); }export default HomePage
 
-        <div onClick={
-            setName(Raspberry FANTA);
-            setImage(img5);
-            setDescrip(soft drink with delicious berry taste)
-          }>
-            <img src={img5} />
-            <p>Raspberry Fanta</p>
-        </div>
 
-        </div>
-        <div>
-            <div>
-            <img src={image} />
-                <p>{name}</p>
-                <p>{descrip}</p>
-            </div>
-        </div>
-    </div>
-    );
-}
-export default HomePage
+

@@ -1,14 +1,16 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class div {
+
+public class div extends Expression{
     String name;
-    tag tag;
+    Expression tag;
 
-    public void setTag(CLASSES.tag tag) {
+    public void setTag(Expression tag) {
         this.tag = tag;
     }
 
-    public CLASSES.tag getTag() {
+    public Expression getTag() {
         return tag;
     }
 
@@ -26,5 +28,9 @@ public class div {
             return ""+tag;
         else return name;
 
+    }
+    public StringBuilder generateHtml(StringBuilder str) {
+        str.append("<div>");
+        return str;
     }
 }

@@ -1,0 +1,32 @@
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
+
+const Test2=()=>{
+
+    const [test2,setTest2] = useState("test_value");
+    const [url,setUrl] = useState('./images/img.png');
+    const [zead,setZead] = useState();
+
+    let data=3;
+    var salary=40;
+
+    useEffect(()=>{
+        setTest2("new_value");
+        setUrl('./images/img2.png');
+    },[])
+
+
+
+    return(
+        <div id={data} className='card'>
+            <img src={url}  />
+            <div>{test2}</div>
+            <p>{salary}</p>
+        </div>
+    )
+}
+
+export default Test2

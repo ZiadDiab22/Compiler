@@ -1,7 +1,7 @@
 import React from 'react'
 import './views/index.html'
 
-const HomePage=()=>{
+const test=()=>{
 
 const [salary,SetSalary]=useState();
 const [age,SetAge]=useState();
@@ -34,6 +34,3 @@ return(
 <p>this is paragraph</p>
 <img src={image} />
 <div>description</div></div>); }export default HomePage
-
-
-

@@ -53,6 +53,18 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUseEffectContent(MyLanguageParser.UseEffectContentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUseEffectContent(MyLanguageParser.UseEffectContentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterImp(MyLanguageParser.ImpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -257,6 +269,18 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJsxTag(MyLanguageParser.JsxTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxTag(MyLanguageParser.JsxTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDiv(MyLanguageParser.DivContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -317,18 +341,6 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(MyLanguageParser.VariableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariable(MyLanguageParser.VariableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterProps(MyLanguageParser.PropsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -372,6 +384,30 @@ public class MyLanguageParserBaseListener implements MyLanguageParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSrc(MyLanguageParser.SrcContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClassName(MyLanguageParser.ClassNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClassName(MyLanguageParser.ClassNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterId(MyLanguageParser.IdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitId(MyLanguageParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

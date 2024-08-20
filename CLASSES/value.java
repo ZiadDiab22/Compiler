@@ -1,6 +1,7 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class value {
+public class value extends Expression{
     String name;
 
     public void setName(String name) {
@@ -14,5 +15,10 @@ public class value {
     @Override
     public String toString() {
         return name;
+    }
+
+    public StringBuilder GenerateJS(StringBuilder Jstr , String s){
+        Jstr.append(" = " + s + " ;\n");
+       return Jstr;
     }
 }

@@ -1,0 +1,49 @@
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
+
+const Test3=()=>{
+
+    const [url,setUrl] = useState('./images/img.png');
+    const [Pname,setPname] = useState("name");
+    const [disc,setDisc] = useState("long_text");
+
+    let data=3;
+    var salary=40;
+
+    useEffect(()=>{
+        setPname("new_value");
+        setUrl('./images/img2.png');
+        setDisc("new long test");
+    },[])
+
+    function Card(){
+        return(
+            <div className='card'>
+                <img src='./images/img.png'  />
+                <div>name</div>
+                <p> discription </p>
+            </div>
+        )
+    }
+
+
+    return(
+        <div>
+            <h1>All products</h1>
+            <p> <Card /> </p>
+            <p> <Card /> </p>
+            <p> <Card /> </p>
+            <div className='big-card' >
+                <img src={url}  />
+                <div>{Pname}</div>
+                <p> {disc} </p>
+                <p>{salary}</p>
+            </div>
+        </div>
+    )
+}
+
+export default Test3

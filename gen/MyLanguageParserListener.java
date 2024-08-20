@@ -38,6 +38,16 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 */
 	void exitUseEffect(MyLanguageParser.UseEffectContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#useEffectContent}.
+	 * @param ctx the parse tree
+	 */
+	void enterUseEffectContent(MyLanguageParser.UseEffectContentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#useEffectContent}.
+	 * @param ctx the parse tree
+	 */
+	void exitUseEffectContent(MyLanguageParser.UseEffectContentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#imp}.
 	 * @param ctx the parse tree
 	 */
@@ -208,6 +218,16 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 */
 	void exitTag(MyLanguageParser.TagContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#jsxTag}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxTag(MyLanguageParser.JsxTagContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#jsxTag}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxTag(MyLanguageParser.JsxTagContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#div}.
 	 * @param ctx the parse tree
 	 */
@@ -258,16 +278,6 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 */
 	void exitButton(MyLanguageParser.ButtonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MyLanguageParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariable(MyLanguageParser.VariableContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MyLanguageParser#variable}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariable(MyLanguageParser.VariableContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#props}.
 	 * @param ctx the parse tree
 	 */
@@ -307,6 +317,26 @@ public interface MyLanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSrc(MyLanguageParser.SrcContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#className}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassName(MyLanguageParser.ClassNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#className}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassName(MyLanguageParser.ClassNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MyLanguageParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void enterId(MyLanguageParser.IdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MyLanguageParser#id}.
+	 * @param ctx the parse tree
+	 */
+	void exitId(MyLanguageParser.IdContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MyLanguageParser#onClick}.
 	 * @param ctx the parse tree

@@ -1,15 +1,17 @@
 package CLASSES;
 
+import CLASSES.Expression;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class component {
+public class component extends Expression{
     String name;
     return_html returnHtml;
     function function;
     arrow_function arrow_function;
-    List<log> logs = new ArrayList<log>();
-    List<decl> decls = new ArrayList<decl>();
+    List<Expression> logs = new ArrayList<Expression>();
+    List<Expression> decls = new ArrayList<Expression>();
 
     public void setReturnHtml(return_html returnHtml) {
         this.returnHtml = returnHtml;
@@ -19,11 +21,11 @@ public class component {
         return returnHtml;
     }
 
-    public List<log> getLogs() {return logs;}
-    public void setLogs(List<log> logs) {this.logs = logs;}
+    public List<Expression> getLogs() {return logs;}
+    public void setLogs(List<Expression> logs) {this.logs = logs;}
 
-    public List<decl> getDecls() {return decls;}
-    public void setDecls(List<decl> decls) {this.decls = decls;}
+    public List<Expression> getDecls() {return decls;}
+    public void setDecls(List<Expression> decls) {this.decls = decls;}
 
     public String getName() {
         return name;

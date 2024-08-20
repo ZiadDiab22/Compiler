@@ -1,14 +1,15 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class imp {
+public class imp extends Expression{
     String name;
-    link link;
+    Expression link;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLink(link link) {
+    public void setLink(Expression link) {
         this.link = link;
     }
 
@@ -16,7 +17,7 @@ public class imp {
         return name;
     }
 
-    public link getLink() {
+    public Expression getLink() {
         return link;
     }
 

@@ -1,6 +1,7 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class useEffect {
+public class useEffect extends Expression{
     String line;
 
     public void setLine(String line) {
@@ -14,5 +15,10 @@ public class useEffect {
     @Override
     public String toString() {
         return line ;
+    }
+
+    public StringBuilder GenerateJs(StringBuilder str , String s){
+        str.append(s + "\n");
+        return str;
     }
 }

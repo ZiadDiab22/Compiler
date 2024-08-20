@@ -13,6 +13,8 @@ Use_State: 'useState' ;
 VarType:'let'|'const'|'var';
 Bool:'true'|'false';
 Console : 'console.log(';
+Class : 'className';
+ID : 'id';
 
 Return: 'return';
 
@@ -38,7 +40,6 @@ Esc : '\\' ;
 Slash:'/';
 Colon : ':' ;
 DColon : '::' ;
-Quote : '\'' ;
 LParen : '(' ;
 RParen : ')' ;
 LBrack : '{' ;
@@ -59,13 +60,16 @@ Underscore : '_' ;
 Pipe : '|' ;
 COMMA: ',';
 Dot : '.' ;
+At : '@' ;
 Math : Plus | Star | Slash | Minus;
 
 Path : Quote Dot? (Slash ARRAY_STRING_VALUES)+ (Dot ARRAY_STRING_VALUES)? Quote;
 
-One_Qoute_Term : '\''Space*(LETTER|ARRAY_STRING_VALUES) Space*'\'';
-Tow_Qoute_Term : DQuote Space* (ARRAY_STRING_VALUES Space)* Space* DQuote;
+One_Qoute_Term : '\''Space*(LETTER|ARRAY_STRING_VALUES|Minus|At|Slash)* Space*'\'';
+Tow_Qoute_Term : DQuote Space* (ARRAY_STRING_VALUES | Space | Underscore)* Space* DQuote;
 Text : DQuote Space* (ARRAY_STRING_VALUES Space*)* Space* DQuote;
+
+Quote : '\'' ;
 
 DQuote : '"' ;
 

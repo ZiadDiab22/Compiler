@@ -2,45 +2,56 @@ package CLASSES;
 
 import java.util.ArrayList;
 import java.util.List;
+import CLASSES.Expression;
 
-public class tag {
-    List<div> div = new ArrayList<div>();
-    List<p> p = new ArrayList<p>();
-    List<h1> h1 = new ArrayList<h1>();
-    List<img> img = new ArrayList<img>();
+
+public class tag extends Expression{
+    List<Expression> div = new ArrayList<Expression>();
+    List<Expression> p = new ArrayList<Expression>();
+    List<Expression> h1 = new ArrayList<Expression>();
+    List<Expression> img = new ArrayList<Expression>();
+    List<Expression> javaScriptValue = new ArrayList<Expression>();
     //List<return_html> returnHtml = new ArrayList<return_html>();
 
 
-    public List<CLASSES.div> getDiv() {
+    public List<Expression> getDiv() {
         return div;
     }
 
-    public void setDiv(List<CLASSES.div> div) {
+    public void setDiv(List<Expression> div) {
         this.div = div;
     }
 
-    public List<CLASSES.h1> getH1() {
+    public List<Expression> getH1() {
         return h1;
     }
 
-    public void setH1(List<CLASSES.h1> h1) {
+    public void setH1(List<Expression> h1) {
         this.h1 = h1;
     }
 
-    public List<CLASSES.img> getImg() {
+    public List<Expression> getImg() {
         return img;
     }
 
-    public void setImg(List<CLASSES.img> img) {
+    public void setImg(List<Expression> img) {
         this.img = img;
     }
 
-    public List<CLASSES.p> getP() {
+    public List<Expression> getP() {
         return p;
     }
 
-    public void setP(List<CLASSES.p> p) {
+    public void setP(List<Expression> p) {
         this.p = p;
+    }
+
+    public void setJavaScriptValue(List<Expression> javaScriptValue) {
+        this.javaScriptValue = javaScriptValue;
+    }
+
+    public List<Expression> getJavaScriptValue() {
+        return javaScriptValue;
     }
 
     @Override

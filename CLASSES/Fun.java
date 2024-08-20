@@ -1,6 +1,7 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class Fun {
+public class Fun extends Expression{
     String name;
 
     public void setName(String name) {

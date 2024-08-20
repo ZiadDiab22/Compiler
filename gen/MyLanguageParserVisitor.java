@@ -29,6 +29,12 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUseEffect(MyLanguageParser.UseEffectContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#useEffectContent}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseEffectContent(MyLanguageParser.UseEffectContentContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#imp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -131,6 +137,12 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTag(MyLanguageParser.TagContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#jsxTag}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsxTag(MyLanguageParser.JsxTagContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#div}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -161,12 +173,6 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitButton(MyLanguageParser.ButtonContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MyLanguageParser#variable}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariable(MyLanguageParser.VariableContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#props}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -190,6 +196,18 @@ public interface MyLanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSrc(MyLanguageParser.SrcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#className}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassName(MyLanguageParser.ClassNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MyLanguageParser#id}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitId(MyLanguageParser.IdContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MyLanguageParser#onClick}.
 	 * @param ctx the parse tree

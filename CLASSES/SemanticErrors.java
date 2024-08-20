@@ -125,9 +125,11 @@ public class SemanticErrors {
 
         checkForRedublication(table);
         checkIfPrintedVariableIsDefined(table);
-        checkIfFuncisDeclared(functions);
-        checkIfDividedOnZero(assignments);
-        checkIfArithmeticOperationIsAllowed(assignments);
+        if (functions != null) {
+            checkIfFuncisDeclared(functions);
+            checkIfDividedOnZero(assignments);
+            checkIfArithmeticOperationIsAllowed(assignments);
+        }
     }
 
     public void print(){

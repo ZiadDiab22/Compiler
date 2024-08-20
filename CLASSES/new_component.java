@@ -2,66 +2,67 @@ package CLASSES;
 
 import java.util.ArrayList;
 import java.util.List;
+import CLASSES.*;
 
 public class new_component {
-    List<useState> useStates = new ArrayList<useState>();
-    List<component> components = new ArrayList<component>();
-    List<useEffect> useEffect = new ArrayList<useEffect>();
-    List<useRef> useRef = new ArrayList<useRef>();
-    return_html returnHtml;
-    List<decl> decls = new ArrayList<decl>();
-    List<assign> assigns = new ArrayList<assign>();
-    List<log> logs = new ArrayList<log>();
-    List<imp> imps = new ArrayList<imp>();
-    export export;
-    function function;
-    arrow_function arrow_function;
+    List<Expression> useStates = new ArrayList<Expression>();
+    List<Expression> components = new ArrayList<Expression>();
+    List<Expression> useEffect = new ArrayList<Expression>();
+    List<Expression> useRef = new ArrayList<Expression>();
+    Expression returnHtml;
+    List<Expression> decls = new ArrayList<Expression>();
+    List<Expression> assigns = new ArrayList<Expression>();
+    List<Expression> logs = new ArrayList<Expression>();
+    List<Expression> imps = new ArrayList<Expression>();
+    Expression export;
+    Expression function;
+    Expression arrow_function;
 
 
-    public List<useState> getUseStates() {
+    public List<Expression> getUseStates() {
         return useStates;
     }
-    public void setUseStates(List<useState> useStates) {
+    public void setUseStates(List<Expression> useStates) {
         this.useStates = useStates;
     }
 
-    public List<component> getComponents() {
+    public List<Expression> getComponents() {
         return components;
     }
-    public void setComponents(List<component> components) {
+    public void setComponents(List<Expression> components) {
         this.components = components;
     }
 
 
-    public List<decl> getDecls() {return decls;}
-    public void setDecls(List<decl> decls) {this.decls = decls;}
+    public List<Expression> getDecls() {return decls;}
+    public void setDecls(List<Expression> decls) {this.decls = decls;}
 
-    public List<log> getLogs() {return logs;}
-    public void setLogs(List<log> logs) {this.logs = logs;}
+    public List<Expression> getComLogs() {return logs;}
+    public void setComLogs(List<Expression> logs) {this.logs = logs;}
 
-    public List<imp> getImps() {return imps;}
-    public void setImps(List<imp> imps) {this.imps = imps;}
+    public List<Expression> getImps() {return imps;}
+    public void setImps(List<Expression> imps) {this.imps = imps;}
 
-    public List<assign> getAssigns() {return assigns;}
-    public void setAssigns(List<assign> assigns) {this.assigns = assigns;}
+    public List<Expression> getAssigns() {return assigns;}
+    public void setAssigns(List<Expression> assigns) {this.assigns = assigns;}
 
-    public CLASSES.export getExport() {return export;}
-    public void setExport(CLASSES.export export) {this.export = export;}
+    public Expression getExport() {return export;}
+    public void setExport(Expression export) {this.export = export;}
 
-    public void setArrow_function(arrow_function arrow_function) {this.arrow_function = arrow_function;}
-    public arrow_function getArrow_function() {return arrow_function;}
+    public void setArrow_function(Expression arrow_function) {this.arrow_function = arrow_function;}
+    public Expression getArrow_function() {return arrow_function;}
 
-    public void setFunction(function function) {this.function = function;}
-    public function getFunction() {return function;}
+    public void setFunction(Expression function) {this.function = function;}
+    public Expression getFunction() {return function;}
 
-    public void setUseEffect(List<CLASSES.useEffect> useEffect) {this.useEffect = useEffect;}
-    public void setUseRef(List<CLASSES.useRef> useRef) {this.useRef = useRef;}
+    public void setUseEffect(List<Expression> useEffect) {this.useEffect = useEffect;}
+    public void setUseRef(List<Expression> useRef) {this.useRef = useRef;}
 
-    public List<CLASSES.useEffect> getUseEffect() {return useEffect;}
-    public List<CLASSES.useRef> getUseRef() {return useRef;}
+    public List<Expression> getUseEffect() {return useEffect;}
+    public List<Expression> getUseRef() {return useRef;}
 
-    public void setReturnHtml(return_html returnHtml) {this.returnHtml = returnHtml;}
-    public return_html getReturnHtml() {return returnHtml;}
+    public void setReturnHtml(Expression returnHtml) {this.returnHtml = returnHtml;}
+    public Expression getReturnHtml() {return returnHtml;}
 
     @Override
     public String toString() {
@@ -94,7 +95,14 @@ public class new_component {
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
                 "    <title>" + main_component +"</title>" +
-                 "\n</head>\n"+"<body>");
+                 "\n</head>\n"+"<body>\n");
         return str;
     }
+
+//    public static String generateHtml(){
+//        StringBuilder str = new StringBuilder();
+//        str.append("xx");
+//        str.append(CLASSES.assign.generateHtml());
+//        return str.toString();
+//    }
 }

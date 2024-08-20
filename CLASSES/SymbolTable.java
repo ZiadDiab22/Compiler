@@ -18,7 +18,8 @@ public class SymbolTable {
         for(int i=0;i<rows.size();i++){
             if(rows.get(i)!=null)
             {
-                System.out.println(rows.get(i).getType() + "\t\t\t\t" + rows.get(i).getValue()+ " | " + rows.get(i).getLine());
+                System.out.println(rows.get(i).getType() + "\t\t\t\t" + rows.get(i).getValue()+ " | "
+                        + rows.get(i).getLine() + "  " + rows.get(i).getDetails());
             }
         }
     }

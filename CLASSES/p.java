@@ -1,15 +1,20 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class p {
+import java.util.ArrayList;
+import java.util.List;
+
+public class p extends Expression{
     String name;
-    tag tag=new tag();
+    Expression tag;
+    List<Expression> javaScriptValue = new ArrayList<Expression>();
 
 
-    public void setTag(CLASSES.tag tag) {
+    public void setTag(Expression tag) {
         this.tag = tag;
     }
 
-    public CLASSES.tag getTag() {
+    public Expression getTag() {
         return tag;
     }
 
@@ -19,6 +24,14 @@ public class p {
 
     public String getName() {
         return name;
+    }
+
+    public List<Expression> getJavaScriptValue() {
+        return javaScriptValue;
+    }
+
+    public void setJavaScriptValue(List<Expression> javaScriptValue) {
+        this.javaScriptValue = javaScriptValue;
     }
 
     @Override

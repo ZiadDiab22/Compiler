@@ -1,8 +1,9 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class useRef {
+public class useRef extends Expression{
     String name;
-    Var var;
+    Expression var;
 
     public void setName(String name) {
         this.name = name;
@@ -12,11 +13,11 @@ public class useRef {
         return name;
     }
 
-    public void setVar(Var var) {
+    public void setVar(Expression var) {
         this.var = var;
     }
 
-    public Var getVar() {
+    public Expression getVar() {
         return var;
     }
 

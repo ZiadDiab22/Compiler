@@ -1,6 +1,8 @@
 package CLASSES;
 
-public class function {
+import CLASSES.Expression;
+
+public class function extends Expression {
     String name;
 
     public String getName() {

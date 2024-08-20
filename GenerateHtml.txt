@@ -3,27 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomePage</title>
+    <title>Test3</title>
 </head>
 <body>
-<script>
-function test(){
-console.log(h);
+<div className = 'card'>
 <div></div>
+<p></p>
+
+</div>
 }
-let name = 0
-var sum = "ahmad"
-let sum = false
-console.log(sum);
+<div>
+<div><div></div>
+<p></p>
+
+<p></p>
+</div>
+<p></p>
+
+<p></p>
+
+<p></p>
+<h1> All products</h1>
+</div>
+<script>
+let data  = 3 ;
+var salary  = 40 ;
+var url = './images/img.png' ;
+
+function setUrl(value){
+url = value ;
+}
+var Pname = "name" ;
+
+function setPname(value){
+Pname = value ;
+}
+var disc = "long_text" ;
+
+function setDisc(value){
+disc = value ;
+}
+setPname("new_value");
+setUrl('./images/img2.png');
+setDisc("new long test");
 
 </script>
-<div><div>
-<img src={image}/>
-</div>
-<div> description</div>
-<p> this is paragraph</p>
-<h1> name</h1>
-<img src={image}/>
-</div>
 </body>
 </html>

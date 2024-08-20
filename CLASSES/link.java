@@ -1,6 +1,7 @@
 package CLASSES;
+import CLASSES.Expression;
 
-public class link {
+public class link extends Expression{
 
     String name;
 
