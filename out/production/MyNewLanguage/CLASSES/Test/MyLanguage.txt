@@ -1,39 +1,23 @@
-import React from 'react'
-import './views/index.html'
 
 const test=()=>{
 
-const [salary,SetSalary]=useState();
-const [age,SetAge]=useState();
-let name = 0
-var sum = "ahmad"
-let sum = false
-a = 5 + 3 + x + y + "ziad" + 1
-b = 3 / 0
+let f = 5;
+var a = true;
 
-console.log("sum is" + sum);
+function test3(){
+let f = 5
+x= ali + 1
+return(<div></div>)}
 
-const UseRef = use Ref (test);
-    useEffect(()=>{
-            setName(name);
-        setImg(img1);
-    },[]);
-
-        useEffect(()=>{
-            setName(name);
-            setImg(img1);
-        },[]);
-
-function test(){
-console.log(h);
+function test2(){
+let ahmad = 5
+let ali = 4
+f = 10
+console.log("sum is" + f)
 return(<div></div>)}
 
 return(
-<div><h1>name</h1>
-<div><img src={image} /></div>
-<p>this is paragraph</p>
-<img src={image} />
-<div>description</div></div>); }export default HomePage
+<div></div>); }export default test
 
 
 

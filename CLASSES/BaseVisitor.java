@@ -17,6 +17,9 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     List<List> assignments = new ArrayList<>();
     List<SymbolTable> TablesStack = new ArrayList<>();
     List<String> vars = new ArrayList<>();
+    List<String> usedVars = new ArrayList<>();
+    List<List> Variables = new ArrayList<>();
+    List <String> errors = new ArrayList<>();
 
 
     @Override
@@ -25,6 +28,9 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         SymbolTable S = new SymbolTable();
         TablesStack.add(S);
         TablesStack.get(TablesStack.size() -1);
+
+        List<String> v = new ArrayList<>();
+        Variables.add(v);
 
         for (int i=0;i<ctx.imp().size();i++){
         if(ctx.imp(i)!=null){
@@ -73,6 +79,8 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
                 NC.getComLogs().add(visitLog(ctx.log(i)));
             }}
 
+        NC.setReturnHtml(visitReturn_html((ctx.return_html())));
+
         for (int i=0;i<ctx.component().size();i++){
             if(ctx.component(i)!=null){
                 NC.getComponents().add(visitComponent(ctx.component(i)));
@@ -81,25 +89,22 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         if(ctx.export()!=null)
         NC.setExport(visitExport(ctx.export()));
 
-    NC.setReturnHtml(visitReturn_html((ctx.return_html())));
-
         str.append("\n<script>\n"+Jstr+"\n</script>\n</body>\n</html>\n");
 
-        this.E.check(TablesStack.get(TablesStack.size() -1),this.functions,this.assignments);
-    if (this.E.errors.size()>0){
-        //this.symbolTable.print();
-        this.E.print();
+        TablesStack.get(TablesStack.size()-1).vars = E.addVars(TablesStack.get(TablesStack.size() -1));
+        this.E.check(errors,TablesStack.get(TablesStack.size() -1),this.functions,this.assignments,TablesStack.get(0));
+    if (errors.size()>0){
+        this.E.print(errors);
+        return null;
     } else  {
         System.out.println("All is OK");
-        this.symbolTable.print();
+        TablesStack.get(TablesStack.size() -1).print();
     }
     try (FileWriter file = new FileWriter("GenerateHtml.txt")) {
         file.write(str.toString());
-        //System.out.println("success");
     } catch(IOException e){
         System.out.println("an error occured");
         }
-        this.vars = E.addVars(TablesStack.get(TablesStack.size() -1));
         return NC;
     }
 
@@ -121,12 +126,16 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         str.append("console.log(");
         for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
             if(ctx.ARRAY_STRING_VALUES(i)!=null){
-                str.append(ctx.ARRAY_STRING_VALUES(i).getText());
-                l.logs.add(ctx.ARRAY_STRING_VALUES(i).getText());
+                String name = ctx.ARRAY_STRING_VALUES(i).getText();
+                str.append(name);
+                l.logs.add(name);
                 Row row = new Row();
                 row.setType("print");
-                row.setValue(ctx.ARRAY_STRING_VALUES(i).getText());
+                row.setValue(name);
                 row.setLine(Integer.toString(ctx.Console().getSymbol().getLine()));
+                if ((!Variables.get(Variables.size() - 1).contains(name)) && (!Variables.get(0).contains(name)))
+                    errors.add("Error : in line " + Integer.toString(ctx.Console().getSymbol().getLine())
+                            + " , you cant use Variable \"" + name + "\" before you define it");
                 TablesStack.get(TablesStack.size() -1).getRows().add(row);
             }}
         str.append(");\n");
@@ -198,7 +207,12 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             row.setValue("variable : " + US.getVar() + " function : " + US.getFun() + " par " + ctx.Path().toString());
             row2.setDetails(ctx.Path().toString().substring(1, ctx.Path().toString().length() - 1));
         }
+        else if (ctx.ARRAY_NUMERIC_VALUES().toString().length() > 2) {
+            row.setValue("variable : " + US.getVar() + " function : " + US.getFun() + " par " + ctx.ARRAY_NUMERIC_VALUES().toString());
+            row2.setDetails(ctx.ARRAY_NUMERIC_VALUES().toString().substring(1, ctx.ARRAY_NUMERIC_VALUES().toString().length() - 1));
+        }
         else row.setValue("variable : " + US.getVar() + " function : " + US.getFun());
+
         row.setLine(Integer.toString(ctx.Use_State().getSymbol().getLine()));
         TablesStack.get(TablesStack.size() -1).getRows().add(row);
         TablesStack.get(TablesStack.size() -1).getRows().add(row2);
@@ -254,6 +268,13 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         row.setType(d.getType());
         d.setVariable(ctx.ARRAY_STRING_VALUES().getText());
         row.setValue("\t\t"+d.getVariable());
+        if (d.ErrorHandle(ctx.ARRAY_STRING_VALUES().getText(),Variables.get(Variables.size() -1))){
+            errors.add("Error : in line "+ Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getLine()) +
+                    " , Variable \"" + ctx.ARRAY_STRING_VALUES().getText().trim() +
+                    "\" is already declared ");
+        }
+
+        Variables.get(Variables.size() - 1 ).add(ctx.ARRAY_STRING_VALUES().getText());
         row.setLine(Integer.toString(ctx.ARRAY_STRING_VALUES().getSymbol().getLine()));
         TablesStack.get(TablesStack.size() -1).getRows().add(row);
         d.GenerateJS(Jstr,ctx.VarType().getText(),ctx.ARRAY_STRING_VALUES().getText());
@@ -261,8 +282,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             row.setDetails(ctx.value().children.toString().substring(1, ctx.value().children.toString().length() - 1));
             d.setValue(visitValue(ctx.value()));
         }
-        //System.out.println(ctx.value().children.toString());
-        //str.append(ctx.VarType().getText() + " " + ctx.ARRAY_STRING_VALUES().getText()+ " = " + ctx.value().getText()+"\n");
         return (Expression) d;
     }
 
@@ -274,6 +293,14 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             if (i!=1)
             as.add(ctx.children.get(i).getText());
         }
+        str.append("console.log(");
+        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
+            if(ctx.ARRAY_STRING_VALUES(i)!=null){
+                 a.ErrorHandle(errors,Variables.get(Variables.size() - 1),
+                         Variables.get(0),ctx.ARRAY_STRING_VALUES(i).getText(),
+                         Integer.toString(ctx.Equal().getSymbol().getLine()));
+        }}
+
         List<Integer> l = new ArrayList<>();
         l.add(ctx.Equal().getSymbol().getLine());
         this.assignments.add(as);
@@ -327,6 +354,8 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         component c = new component();
         SymbolTable S = new SymbolTable();
         TablesStack.add(S);
+        List<String> v = new ArrayList<>();
+        Variables.add(v);
         Row row = new Row();
         row.setType("component");
         row.setLine(Integer.toString(ctx.RBrack().getSymbol().getLine()));
@@ -338,19 +367,28 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             row.setValue(ctx.function().ARRAY_STRING_VALUES().getText());
         }
         TablesStack.get(TablesStack.size() -1).getRows().add(row);
-        for (int i=0;i<ctx.log().size();i++){
-            if(ctx.log(i)!=null){
-                c.getLogs().add(visitLog(ctx.log(i)));
-            }}
+
 
         for (int i=0;i<ctx.decl().size();i++){
             if(ctx.decl(i)!=null){
                 c.getDecls().add(visitDecl(ctx.decl(i)));
             }}
 
-        this.E.check(TablesStack.get(TablesStack.size() -1),null,null);
+        for (int i=0;i<ctx.assign().size();i++){
+            if(ctx.assign(i)!=null){
+                c.getAssigns().add(visitAssign(ctx.assign(i)));
+            }}
+
+        for (int i=0;i<ctx.log().size();i++){
+            if(ctx.log(i)!=null){
+                c.getLogs().add(visitLog(ctx.log(i)));
+            }}
+
+        this.E.check(errors,TablesStack.get(TablesStack.size() -1),null,null,TablesStack.get(0));
 
             TablesStack.remove(TablesStack.get(TablesStack.size() -1));
+            Variables.remove(Variables.get(Variables.size() -1));
+
 
         c.setReturnHtml(visitReturn_html((ctx.return_html())));
         str.append("\n}\n");
@@ -392,6 +430,14 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public Expression visitTag(MyLanguageParser.TagContext ctx) {
         tag t = new tag();
+        for (int i=0;i<ctx.h1().size();i++){
+            if(ctx.h1(i)!=null){
+                t.getH1().add(visitH1(ctx.h1(i)));
+            }}
+        for (int i=0;i<ctx.p().size();i++){
+            if(ctx.p(i)!=null){
+                t.getP().add(visitP(ctx.p(i)));
+            }}
         for (int i=0;i<ctx.img().size();i++){
             if(ctx.img(i)!=null){
                 t.getImg().add(visitImg(ctx.img(i)));
@@ -399,14 +445,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             for (int i=0;i<ctx.div().size();i++){
                 if(ctx.div(i)!=null){
                     t.getDiv().add(visitDiv(ctx.div(i)));
-                }}
-            for (int i=0;i<ctx.p().size();i++){
-                if(ctx.p(i)!=null){
-                    t.getP().add(visitP(ctx.p(i)));
-                }}
-            for (int i=0;i<ctx.h1().size();i++){
-                if(ctx.h1(i)!=null){
-                    t.getH1().add(visitH1(ctx.h1(i)));
                 }}
         for (int i=0;i<ctx.javaScriptValue().size();i++){
             if(ctx.javaScriptValue(i)!=null){
@@ -424,6 +462,11 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //        }
         d.setName("div");
         d.generateHtml(str);
+        for (int i=0;i<ctx.props().size();i++){
+            if(ctx.props(i)!=null){
+                d.getProps().add(visitProps(ctx.props(i)));
+            }}
+        str.append(">");
         if (ctx.tag()!=null){
             d.setTag(visitTag(ctx.tag()));
         }
@@ -452,7 +495,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //        row.setType("html tag");
 //        row.setValue("h1");
 //        symbolTable.getRows().add(row);
-        str.append("</h1>");
+        str.append("</h1>\n");
         return (Expression) h;
     }
 
@@ -460,10 +503,16 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public Expression visitP(MyLanguageParser.PContext ctx) {
         p pp = new p();
         pp.setName("p");
-        str.append("\n<p>");
+        pp.GenerateHtml(str);
 //        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
 //            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
 //        }
+        for (int i=0;i<ctx.props().size();i++){
+            if(ctx.props(i)!=null){
+                pp.getProps().add(visitProps(ctx.props(i)));
+            }}
+
+        str.append(">");
         if (ctx.tag()!=null){
             pp.setTag(visitTag(ctx.tag()));
         }
@@ -471,6 +520,9 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             if(ctx.javaScriptValue(i)!=null){
                 pp.getJavaScriptValue().add(visitJavaScriptValue(ctx.javaScriptValue(i)));
             }}
+        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
+            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
+        }
 //        Row row = new Row();
 //        row.setType("html tag");
 //        row.setValue("p");
@@ -499,12 +551,12 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         String a;
         if (ctx.ARRAY_STRING_VALUES() != null) a= ctx.ARRAY_STRING_VALUES().getText();
         else a= ctx.Path().getText();
-        for(int i=0;i<this.symbolTable.rows.size();i++){
-            if ((this.symbolTable.rows.get(i).getType().equals("let") ||
-                    this.symbolTable.rows.get(i).getType().equals("var")||
-                    this.symbolTable.rows.get(i).getType().equals("const")) &&
-                    ((this.symbolTable.rows.get(i).getValue().trim().equals(a)))) {
-                s.GenerateHtml(str,this.symbolTable.rows.get(i).getDetails());
+        for(int i=0;i<TablesStack.get(TablesStack.size() -1).rows.size();i++){
+            if ((TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("let") ||
+                    TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("var")||
+                    TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("const")) &&
+                    ((TablesStack.get(TablesStack.size() -1).rows.get(i).getValue().trim().equals(a)))) {
+                s.GenerateHtml(str,TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails());
             }
             }
 
@@ -518,6 +570,8 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             p.setClassName(visitClassName(ctx.className()));
         if(ctx.id()!=null)
             p.setID(visitId(ctx.id()));
+        if(ctx.onClick()!=null)
+            p.setOnClick(visitOnClick(ctx.onClick()));
         return (Expression) p;
     }
 
@@ -537,6 +591,23 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public Expression visitClassName(MyLanguageParser.ClassNameContext ctx) {
         className c = new className();
         c.GenerateHtml(str,ctx.One_Qoute_Term().getText());
+        return (Expression) c;
+    }
+
+    @Override
+    public Expression visitOnClick(MyLanguageParser.OnClickContext ctx) {
+        onClick c = new onClick();
+        for (int i=0;i<ctx.callFunction().size();i++){
+            if(ctx.callFunction(i)!=null){
+                c.getCallFunction().add(visitCallFunction(ctx.callFunction(i)));
+            }}
+        return (Expression) c;
+    }
+
+    @Override
+    public Expression visitCallFunction(MyLanguageParser.CallFunctionContext ctx) {
+        callFunction c = new callFunction();
+        c.GenerateHtml(str,ctx.getText());
         return (Expression) c;
     }
 
@@ -561,18 +632,19 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
 //                A = true;
 //            }
 //        }
-
-        for(int i=0;i<this.symbolTable.rows.size();i++){
-            if ((this.symbolTable.rows.get(i).getType().equals("let") ||
-                    this.symbolTable.rows.get(i).getType().equals("var")||
-                    this.symbolTable.rows.get(i).getType().equals("const")) &&
-                    this.symbolTable.rows.get(i).getValue().trim().equals(ctx.ARRAY_STRING_VALUES().getText())) {
-                if (this.symbolTable.rows.get(i).getDetails().charAt(0) == '\"')
-                    j.GenerateHtml(str, this.symbolTable.rows.get(i).getDetails().toString().substring(1, this.symbolTable.rows.get(i).getDetails().toString().length() - 1));
-                else j.GenerateHtml(str, this.symbolTable.rows.get(i).getDetails());
+        if ((ctx != null)){
+        for(int i=0;i<TablesStack.get(TablesStack.size() -1).rows.size();i++){
+            if ((TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("let") ||
+                    TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("var")||
+                    TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("const")) &&
+                    TablesStack.get(TablesStack.size() -1).rows.get(i).getValue().trim().equals(ctx.ARRAY_STRING_VALUES().getText())) {
+                if ((TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails() != null ) &&
+                        (TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().charAt(0) == '\"'))
+                    j.GenerateHtml(str, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().toString().substring(1, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().toString().length() - 1));
+                else j.GenerateHtml(str, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails());
                 A = true;
             }
-        }
+        }}
         return (Expression) j;
     }
 }

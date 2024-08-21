@@ -10,7 +10,7 @@ useRef : Const var Equal UseRef LParen ARRAY_STRING_VALUES RParen SEIMIE_QO*;
 useEffect : UseEffect LParen (arrow_function|function) ( useEffectContent)*
             RBrack COMMA LBig (ARRAY_STRING_VALUES|COMMA)* RBig RParen SEIMIE_QO*;
 
-useEffectContent : (ARRAY_STRING_VALUES|RParen|LParen|Path|Tow_Qoute_Term|Dot)* SEIMIE_QO;
+useEffectContent : (ARRAY_STRING_VALUES|ARRAY_NUMERIC_VALUES|RParen|LParen|Path|Tow_Qoute_Term|Dot)* SEIMIE_QO;
 
 imp : Imp (LBrack? (Use_State | UseEffect | COMMA | ARRAY_STRING_VALUES)* RBrack? From)? link SEIMIE_QO*;
 
@@ -54,11 +54,11 @@ button : Lt Button (props)* Gt (ARRAY_STRING_VALUES |ARRAY_NUMERIC_VALUES)* Lt S
 props : ( width | height | onClick | className | id);
 width : Width Equal ARRAY_NUMERIC_VALUES ( Pixl | Rate );
 height : Height Equal ARRAY_NUMERIC_VALUES ( Pixl | Rate );
-src : Src Equal (Path | (LBrack ARRAY_STRING_VALUES RBrack));
+src : Src Equal (Path | (LBrack (ARRAY_STRING_VALUES|Path) RBrack));
 className : Class Equal One_Qoute_Term;
-id : ID Equal javaScriptValue;
-onClick : OnClick Equal LBrack  callFunction*  RBrack;
+id : ID Equal (javaScriptValue|Tow_Qoute_Term);
+onClick : OnClick Equal LBrack (LParen RParen Equal Gt callFunction SEIMIE_QO*)* RBrack;
 
-javaScriptValue : LBrack (ARRAY_STRING_VALUES |ARRAY_NUMERIC_VALUES ) RBrack;
-callFunction : LParen RParen Equal Gt ARRAY_STRING_VALUES* LParen (ARRAY_STRING_VALUES |ARRAY_NUMERIC_VALUES | Plus )* RParen SEIMIE_QO*;
+javaScriptValue : LBrack (ARRAY_STRING_VALUES |ARRAY_NUMERIC_VALUES ) RBrack ;
+callFunction : ARRAY_STRING_VALUES* LParen (ARRAY_STRING_VALUES |ARRAY_NUMERIC_VALUES | Plus )* RParen ;
 

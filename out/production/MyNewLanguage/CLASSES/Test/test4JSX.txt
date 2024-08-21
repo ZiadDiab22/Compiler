@@ -1,0 +1,22 @@
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
+
+const Test4=()=>{
+
+    const [test4,setTest4] = useState("test_value");
+    const [url,setUrl] = useState('./images/img.png');
+    const [select,setSelect] = useState(0);
+
+    return(
+        <div id={select} className='card'>
+            <img src={url}  />
+            <div>{test4}</div>
+            <p onClick={()=>setSelect(1)} > select one </p>
+        </div>
+    )
+}
+
+export default Test4

@@ -1,0 +1,62 @@
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
+
+const FinalTest=()=>{
+
+    const [url,setUrl] = useState('./images/img.png');
+    const [Pname,setPname] = useState("name");
+    const [disc,setDisc] = useState("longText");
+    const [salary,setSalary] = useState("longText");
+    const [select,setSelect] = useState(0);
+    const [test,setTest] = useState();
+
+    useEffect(()=>{
+        setSelect(1);
+    },[])
+
+
+    return(
+        <div>
+            <div className='AllCards'>
+                <div onClick={()=>setSelect(1)} id="1" className='card'>
+                    <img src={'./images/img.png'}  />
+                    <div>name2</div>
+                    <p>long test as discription1</p>
+                    <p>1000 sp</p>
+                </div>
+
+                <div onClick={()=>setSelect(2)} id="2" className='card'>
+                    <img src={'./images/img.png'}  />
+                    <div>name2</div>
+                    <p> long test as discription2</p>
+                    <p>2000 sp</p>
+                </div>
+
+                <div onClick={()=>setSelect(3)} id="3" className='card'>
+                    <img src={'./images/img.png'}  />
+                    <div>name3</div>
+                    <p>long test as discription3</p>
+                    <p>3000 sp</p>
+                </div>
+
+
+            </div>
+
+            <div id={select} className='selected-card' >
+
+                <div className='card'>
+                    <img src={url} />
+                    <div>{Pname}</div>
+                    <p> {disc} </p>
+                    <p>{salary}</p>
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
+export default FinalTest

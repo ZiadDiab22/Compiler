@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <link rel="stylesheet" href="css.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>FinalTest</title>
 </head>
 <body>
-console.log(sum);
-console.log(h);
 <div>
+<div class = 'AllCards'><div onClick="setSelect(1)" id="" class = 'card'>
+<p > long test as discription1</p>
 
-</div>
-}
-<div>
-<div></div><div></div>
-<p></p>
-<h1> name</h1>
+<p > sp</p>
+<div></div></div><div onClick="setSelect(2)" id="" class = 'card'>
+<p > long test as discription2</p>
+
+<p > sp</p>
+<div></div></div><div onClick="setSelect(3)" id="" class = 'card'>
+<p > long test as discription3</p>
+
+<p > sp</p>
+<div></div></div></div><div id="0" class = 'selected-card'><div class = 'card'>
+<p >longText</p>
+
+<p >longText</p>
+
+<img src='./images/img.png' />
+<div>name</div></div></div>
 </div>
 <script>
-let name  = 0 ;
-var sum  = "ahmad" ;
-let sum  = false ;
-var salary ;
+var url = './images/img.png' ;
 
-function SetSalary(value){
+function setUrl(value){
+url = value ;
+}
+var Pname = "name" ;
+
+function setPname(value){
+Pname = value ;
+}
+var disc = "longText" ;
+
+function setDisc(value){
+disc = value ;
+}
+var salary = "longText" ;
+
+function setSalary(value){
 salary = value ;
 }
-var age ;
+var select = 0 ;
 
-function SetAge(value){
-age = value ;
+function setSelect(value){
+select = value ;
 }
-setName(name);
-setImg(img1);
-setName(name);
-setImg(img1);
+var test ;
+
+function setTest(value){
+test = value ;
+}
+setSelect(1);
 
 </script>
 </body>

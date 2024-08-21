@@ -4,6 +4,7 @@ import CLASSES.Expression;
 public class props extends Expression {
     Expression className;
     Expression ID;
+    Expression OnClick;
 
 
     public void setClassName(Expression className) {
@@ -20,5 +21,13 @@ public class props extends Expression {
 
     public Expression getID() {
         return ID;
+    }
+
+    public Expression getOnClick() {
+        return OnClick;
+    }
+
+    public void setOnClick(Expression onClick) {
+        OnClick = onClick;
     }
 }

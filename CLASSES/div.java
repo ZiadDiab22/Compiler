@@ -1,10 +1,15 @@
 package CLASSES;
 import CLASSES.Expression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class div extends Expression{
     String name;
     Expression tag;
+    List<Expression> props = new ArrayList<Expression>();
+
 
     public void setTag(Expression tag) {
         this.tag = tag;
@@ -22,6 +27,14 @@ public class div extends Expression{
         return name;
     }
 
+    public void setProps(List<Expression> props) {
+        this.props = props;
+    }
+
+    public List<Expression> getProps() {
+        return props;
+    }
+
     @Override
     public String toString() {
         if (tag != null)
@@ -30,7 +43,7 @@ public class div extends Expression{
 
     }
     public StringBuilder generateHtml(StringBuilder str) {
-        str.append("<div>");
+        str.append("<div");
         return str;
     }
 }

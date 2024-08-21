@@ -11,7 +11,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class main {
     public static void main (String[] args) throws IOException{
-        String source = "CLASSES/Test/test3jsx.txt";
+        String source = "CLASSES/Test/test4JSX.txt";
         CharStream cs = fromFileName(source);
         MyLanguageLexer lexer = new MyLanguageLexer(cs);
         CommonTokenStream token = new CommonTokenStream(lexer);

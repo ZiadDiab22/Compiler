@@ -1,6 +1,9 @@
 package CLASSES;
 import CLASSES.Expression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class decl extends Expression{
     String type;
@@ -39,5 +42,12 @@ public class decl extends Expression{
     public StringBuilder GenerateJS (StringBuilder Jstr, String a , String b){
         Jstr.append(a + " "+ b + " ");
         return Jstr;
+    }
+
+    public boolean ErrorHandle(String s, List l){
+        if (l.contains(s))
+        return true;
+        return false;
+
     }
 }

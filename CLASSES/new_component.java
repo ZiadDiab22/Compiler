@@ -92,6 +92,7 @@ public class new_component {
         str.append("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
+                "     <link rel=\"stylesheet\" href=\"css.css\">\n" +
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
                 "    <title>" + main_component +"</title>" +

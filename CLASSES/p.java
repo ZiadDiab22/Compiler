@@ -8,6 +8,7 @@ public class p extends Expression{
     String name;
     Expression tag;
     List<Expression> javaScriptValue = new ArrayList<Expression>();
+    List<Expression> props = new ArrayList<Expression>();
 
 
     public void setTag(Expression tag) {
@@ -34,6 +35,14 @@ public class p extends Expression{
         this.javaScriptValue = javaScriptValue;
     }
 
+    public List<Expression> getProps() {
+        return props;
+    }
+
+    public void setProps(List<Expression> props) {
+        this.props = props;
+    }
+
     @Override
     public String toString() {
 
@@ -41,5 +50,10 @@ public class p extends Expression{
             return ""+tag;
         else return name;
 
+    }
+
+    public StringBuilder GenerateHtml(StringBuilder str){
+        str.append("\n<p ");
+        return str;
     }
 }

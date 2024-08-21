@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SymbolTable {
     List <Row> rows = new ArrayList<>();
+    List<String> vars = new ArrayList<>();
 
     public List<Row> getRows() {
         return rows;

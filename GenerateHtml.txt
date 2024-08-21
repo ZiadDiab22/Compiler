@@ -1,51 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <link rel="stylesheet" href="css.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test3</title>
+    <title>Test4</title>
 </head>
 <body>
-<div className = 'card'>
-<div></div>
-<p></p>
+<div id="0" class = 'card'>
 
-</div>
-}
-<div>
-<div><div></div>
-<p></p>
+<p  onClick="setSelect(1)"> select one</p>
 
-<p></p>
-</div>
-<p></p>
-
-<p></p>
-
-<p></p>
-<h1> All products</h1>
+<img src='./images/img.png' />
+<div>test_value</div>
 </div>
 <script>
-let data  = 3 ;
-var salary  = 40 ;
+var test4 = "test_value" ;
+
+function setTest4(value){
+test4 = value ;
+}
 var url = './images/img.png' ;
 
 function setUrl(value){
 url = value ;
 }
-var Pname = "name" ;
+var select = 0 ;
 
-function setPname(value){
-Pname = value ;
+function setSelect(value){
+select = value ;
 }
-var disc = "long_text" ;
-
-function setDisc(value){
-disc = value ;
-}
-setPname("new_value");
-setUrl('./images/img2.png');
-setDisc("new long test");
 
 </script>
 </body>

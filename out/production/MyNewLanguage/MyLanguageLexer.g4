@@ -66,7 +66,7 @@ Math : Plus | Star | Slash | Minus;
 Path : Quote Dot? (Slash ARRAY_STRING_VALUES)+ (Dot ARRAY_STRING_VALUES)? Quote;
 
 One_Qoute_Term : '\''Space*(LETTER|ARRAY_STRING_VALUES|Minus|At|Slash)* Space*'\'';
-Tow_Qoute_Term : DQuote Space* (ARRAY_STRING_VALUES | Space | Underscore)* Space* DQuote;
+Tow_Qoute_Term : DQuote Space* (ARRAY_STRING_VALUES | Space | Underscore|ARRAY_NUMERIC_VALUES)* Space* DQuote;
 Text : DQuote Space* (ARRAY_STRING_VALUES Space*)* Space* DQuote;
 
 Quote : '\'' ;

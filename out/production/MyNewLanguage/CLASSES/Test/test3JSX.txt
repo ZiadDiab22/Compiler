@@ -36,7 +36,7 @@ const Test3=()=>{
             <p> <Card /> </p>
             <p> <Card /> </p>
             <p> <Card /> </p>
-            <div className='big-card' >
+            <div className='bigCard' >
                 <img src={url}  />
                 <div>{Pname}</div>
                 <p> {disc} </p>
