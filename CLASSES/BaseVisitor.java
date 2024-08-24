@@ -225,7 +225,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public Expression visitUseEffect(MyLanguageParser.UseEffectContext ctx) {
         useEffect u = new useEffect();
-        //u.GenerateJS(Jstr);
         u.setLine(Integer.toString(ctx.UseEffect().getSymbol().getLine()));
         Row row = new Row();
         System.out.println();
@@ -409,11 +408,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public Expression visitHtml_tag(MyLanguageParser.Html_tagContext ctx) {
         html_tag h = new html_tag();
         h.generateHtml(str);
-        //str.append("<div>");
-//        Row row = new Row();
-//        row.setType("html tag");
-//        row.setValue("div");
-//        symbolTable.getRows().add(row);
         for (int i=0;i<ctx.props().size();i++){
             if(ctx.props(i)!=null){
                 h.getProps().add(visitProps(ctx.props(i)));
@@ -456,10 +450,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public Expression visitDiv(MyLanguageParser.DivContext ctx) {
         div d = new div();
-      //  str.append("<div>");
-//        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
-//            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
-//        }
         d.setName("div");
         d.generateHtml(str);
         for (int i=0;i<ctx.props().size();i++){
@@ -471,12 +461,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
             d.setTag(visitTag(ctx.tag()));
         }
         str.append("</div>");
-        //str.append(">\n");
-//        Row row = new Row();
-//        row.setType("html tagggg");
-//        row.setValue("div");
-//        symbolTable.getRows().add(row);
-          //  str.append("</div>\n");
             return (Expression) d;
     }
 
@@ -491,10 +475,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         if (ctx.tag()!=null){
             h.setTag(visitTag(ctx.tag()));
         }
-//        Row row = new Row();
-//        row.setType("html tag");
-//        row.setValue("h1");
-//        symbolTable.getRows().add(row);
         str.append("</h1>\n");
         return (Expression) h;
     }
@@ -504,9 +484,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
         p pp = new p();
         pp.setName("p");
         pp.GenerateHtml(str);
-//        for (int i=0;i<ctx.ARRAY_STRING_VALUES().size();i++){
-//            str.append(" "+ctx.ARRAY_STRING_VALUES(i).getText());
-//        }
         for (int i=0;i<ctx.props().size();i++){
             if(ctx.props(i)!=null){
                 pp.getProps().add(visitProps(ctx.props(i)));
@@ -535,13 +512,7 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     public Expression visitImg(MyLanguageParser.ImgContext ctx) {
         img i = new img();
         i.setName(ctx.Img().getText());
-        //str.append("\n<img src={");
         i.setSrc(visitSrc(ctx.src()));
-        //str.append("}/>\n");
-//        Row row = new Row();
-//        row.setType("html tag");
-//        row.setValue("img");
-//        symbolTable.getRows().add(row);
         return (Expression) i;
     }
 
@@ -623,15 +594,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
     @Override
     public Expression visitJavaScriptValue(MyLanguageParser.JavaScriptValueContext ctx) {
         JavaScriptValue j = new JavaScriptValue();
-        boolean A = false;
-//        for(int i=0;i<this.symbolTable.rows.size();i++){
-//            if (this.symbolTable.rows.get(i).getType().equals("Use State")) {
-//                String[] arr = this.symbolTable.rows.get(i).getValue().trim().split(" ");
-//                if (arr[2].toString().equals(ctx.ARRAY_STRING_VALUES().getText()))
-//                j.GenerateHtml(str,arr[7].toString().substring(2, arr[7].toString().length() - 2));
-//                A = true;
-//            }
-//        }
         if ((ctx != null)){
         for(int i=0;i<TablesStack.get(TablesStack.size() -1).rows.size();i++){
             if ((TablesStack.get(TablesStack.size() -1).rows.get(i).getType().equals("let") ||
@@ -642,7 +604,6 @@ public class BaseVisitor extends MyLanguageParserBaseVisitor {
                         (TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().charAt(0) == '\"'))
                     j.GenerateHtml(str, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().toString().substring(1, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails().toString().length() - 1));
                 else j.GenerateHtml(str, TablesStack.get(TablesStack.size() -1).rows.get(i).getDetails());
-                A = true;
             }
         }}
         return (Expression) j;

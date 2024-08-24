@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 
 const FinalTest=()=>{
 
-    const [url,setUrl] = useState('./images/img.png');
+    const [url,setUrl] = useState('./a.jpg');
+    const [url1,setUrl1] = useState('./a.jpg');
+    const [url2,setUrl2] = useState('./b.jpg');
+    const [url3,setUrl3] = useState('./c.jpg');
     const [Pname,setPname] = useState("name");
     const [disc,setDisc] = useState("longText");
     const [salary,setSalary] = useState("longText");
@@ -21,22 +24,17 @@ const FinalTest=()=>{
     return(
         <div>
             <div className='AllCards'>
-                <div onClick={()=>setSelect(1)} id="1" className='card'>
-                    <img src={'./images/img.png'}  />
-                    <div>name2</div>
-                    <p>long test as discription1</p>
-                    <p>1000 sp</p>
-                </div>
+                
 
                 <div onClick={()=>setSelect(2)} id="2" className='card'>
-                    <img src={'./images/img.png'}  />
+                    <img src={url2}  />
                     <div>name2</div>
                     <p> long test as discription2</p>
                     <p>2000 sp</p>
                 </div>
 
                 <div onClick={()=>setSelect(3)} id="3" className='card'>
-                    <img src={'./images/img.png'}  />
+                    <img src={url3} />
                     <div>name3</div>
                     <p>long test as discription3</p>
                     <p>3000 sp</p>

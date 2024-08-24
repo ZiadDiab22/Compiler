@@ -12,27 +12,48 @@
 <p > long test as discription1</p>
 
 <p > sp</p>
+
+<img src='./a.jpg' />
 <div></div></div><div onClick="setSelect(2)" id="" class = 'card'>
 <p > long test as discription2</p>
 
 <p > sp</p>
+
+<img src='./b.jpg' />
 <div></div></div><div onClick="setSelect(3)" id="" class = 'card'>
 <p > long test as discription3</p>
 
 <p > sp</p>
+
+<img src='./c.jpg' />
 <div></div></div></div><div id="0" class = 'selected-card'><div class = 'card'>
 <p >longText</p>
 
 <p >longText</p>
 
-<img src='./images/img.png' />
+<img src='./a.jpg' />
 <div>name</div></div></div>
 </div>
 <script>
-var url = './images/img.png' ;
+var url = './a.jpg' ;
 
 function setUrl(value){
 url = value ;
+}
+var url1 = './a.jpg' ;
+
+function setUrl1(value){
+url1 = value ;
+}
+var url2 = './b.jpg' ;
+
+function setUrl2(value){
+url2 = value ;
+}
+var url3 = './c.jpg' ;
+
+function setUrl3(value){
+url3 = value ;
 }
 var Pname = "name" ;
 

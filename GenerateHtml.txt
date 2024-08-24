@@ -4,32 +4,77 @@
      <link rel="stylesheet" href="css.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test4</title>
+    <title>FinalTest</title>
 </head>
 <body>
-<div id="0" class = 'card'>
+<div>
+<div class = 'AllCards'><div onClick="setSelect(2)" id="" class = 'card'>
+<p > long test as discription2</p>
 
-<p  onClick="setSelect(1)"> select one</p>
+<p > sp</p>
 
-<img src='./images/img.png' />
-<div>test_value</div>
+<img src='./b.jpg' />
+<div></div></div><div onClick="setSelect(3)" id="" class = 'card'>
+<p > long test as discription3</p>
+
+<p > sp</p>
+
+<img src='./c.jpg' />
+<div></div></div></div><div id="0" class = 'selected-card'><div class = 'card'>
+<p >longText</p>
+
+<p >longText</p>
+
+<img src='./a.jpg' />
+<div>name</div></div></div>
 </div>
 <script>
-var test4 = "test_value" ;
-
-function setTest4(value){
-test4 = value ;
-}
-var url = './images/img.png' ;
+var url = './a.jpg' ;
 
 function setUrl(value){
 url = value ;
+}
+var url1 = './a.jpg' ;
+
+function setUrl1(value){
+url1 = value ;
+}
+var url2 = './b.jpg' ;
+
+function setUrl2(value){
+url2 = value ;
+}
+var url3 = './c.jpg' ;
+
+function setUrl3(value){
+url3 = value ;
+}
+var Pname = "name" ;
+
+function setPname(value){
+Pname = value ;
+}
+var disc = "longText" ;
+
+function setDisc(value){
+disc = value ;
+}
+var salary = "longText" ;
+
+function setSalary(value){
+salary = value ;
 }
 var select = 0 ;
 
 function setSelect(value){
 select = value ;
 }
+var test ;
+
+function setTest(value){
+test = value ;
+}
+setSelect(1);
 
 </script>
 </body>
